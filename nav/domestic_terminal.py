@@ -1,4 +1,4 @@
-from enum import Enum
+import enum
 
 # Graph Node
 class Node(object):
@@ -10,14 +10,14 @@ class Node(object):
         self.paths.append((id, distance, dir, type))
 
 # Cardinal Direction
-class Dir(Enum):
+class Dir(enum.Enum):
     N = 0
     S = 1
     E = 2
     W = 3
 
 # For Time Calculation
-class Type(Enum):
+class Type(enum.Enum):
     NORMAL = 0
     STAIRS = 1
     ESCALATOR = 2
