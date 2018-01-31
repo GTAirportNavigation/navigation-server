@@ -17,6 +17,21 @@ class Dir(enum.Enum):
     W = 7
     NW = 8
 
+def opposite_directions(a, b):
+    av = a.value
+    bv = b.value
+    if av == 0 or bv == 0:
+        return False
+    if av > 4:
+        av -= 4
+        if av == bv:
+            return True
+    else:
+        av += 4
+        if av == bv:
+            return True
+    return False
+
 # Node Type
 class Type(enum.Enum):
     # A Joint is a node
@@ -49,9 +64,13 @@ class Node(object):
 class Path(enum.Enum):
     NORMAL = 0
     STAIRS = 1
-    ESCALATOR = 2
-    TRAIN = 3
+    ESCALATOR_UP = 2
+    # Escalator Down
+    ESCALATOR_DW = 3
+    ELEVATOR = 4
+    TRAIN = 5
 
+# Get Index in Graph from ID
 def get_node_index(graph, id):
     index = 0
     for node in graph:
@@ -77,3 +96,23 @@ def find_path(graph, start, end, parameters=[]):
                 if index not in closed:
                     open.append(index)
                     route.append(tr + [temp])
+
+# Ensure All Edges Are Reversed
+# Also Checks Matching Distance Values
+# As Well As Opposing Directions
+def verify_graph(graph):
+    print('Errors Deteced:')
+    for node1 in graph:
+        sid = node1.id
+        for path1 in node1.paths:
+            eid = path1[0]
+            distance = path1[1]
+            dir = path1[2]
+            node2 = get_node_index(graph, eid)
+            verified = False
+            for path2 in graph[node2].paths:
+                if path2[0] == sid and path2[1] == distance and opposite_directions(path2[2], dir):
+                    verified = True
+            if not verified:
+                print('Error:', sid, eid)
+    print('----')
