@@ -28,6 +28,8 @@ class Node(object):
         # useful in situations such as:
         # '500 feet on your LEFT'
         self.dir = dir
+        # adjacent nodes of the current node
+        self.neighbours = set()
         # joint = True for nodes which have no
         # significance themselves, just as
         # connecting points to other nodes
@@ -37,6 +39,12 @@ class Node(object):
         return 'ID: {} Name: \'{}\' Joint: {}\nPaths: {}'.format(self.id, self.name, self.joint, self.paths)
     def add_path(self, id, distance, dir, type):
         self.paths.append((id, distance, dir, type))
+        # add adjacent node of the current location, the dir is relative to the current location
+    def add_neighbour(self, neighbour, dir, distance, type):
+        if neighbour not in self.neighbours:
+            self.dir = dir
+            self.neighbours.add(neighbour)
+
 
 # Edge Type
 class Type(enum.Enum):
