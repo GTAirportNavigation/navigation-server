@@ -16,30 +16,37 @@ class Dir(enum.Enum):
     # West
     W = 7
     NW = 8
-   
 
+# Node Type
+class Type(enum.Enum):
+    # A Joint is a node
+    # with no intrinsic value
+    # but connects other nodes
+    Joint = 0
+    Gate = 1
+    # Airline Counter
+    Counter = 2
+    Restaurant = 3
+    Store = 4
 
 # Graph Node
 class Node(object):
-    def __init__(self, id='', name='', dir=Dir.X, joint=False):
+    def __init__(self, id='', name='', dir=Dir.X, type=Type.Joint):
         self.id = id
         self.name = name
         # direction node is facing
         # useful in situations such as:
         # '500 feet on your LEFT'
         self.dir = dir
-        # joint = True for nodes which have no
-        # significance themselves, just as
-        # connecting points to other nodes
-        self.joint = False
+        self.type = type
         self.paths = []
     def __str__(self):
-        return 'ID: {} Name: \'{}\' Joint: {}\nPaths: {}'.format(self.id, self.name, self.joint, self.paths)
-    def add_path(self, id, distance, dir, type):
-        self.paths.append((id, distance, dir, type))
+        return 'ID: {} Name: \'{}\' Type: {}\nPaths: {}'.format(self.id, self.name, self.type, self.paths)
+    def add_path(self, id, distance, dir, path_type):
+        self.paths.append((id, distance, dir, path_type))
 
-# Edge Type
-class Type(enum.Enum):
+# Path Type
+class Path(enum.Enum):
     NORMAL = 0
     STAIRS = 1
     ESCALATOR = 2
