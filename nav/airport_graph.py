@@ -52,7 +52,7 @@ class Path(enum.Enum):
     ESCALATOR = 2
     TRAIN = 3
 
-def get_node(graph, id):
+def get_node_index(graph, id):
     index = 0
     for node in graph:
         if node.id == id:
@@ -61,7 +61,7 @@ def get_node(graph, id):
 
 # Wrapper to Obtain Instructions
 def find_path(graph, start, end, parameters=[]):    
-    open = [get_node(graph, start)]
+    open = [get_node_index(graph, start)]
     closed = []
     route = [[]]
     while len(open) > 0:
@@ -69,11 +69,11 @@ def find_path(graph, start, end, parameters=[]):
         tr = route.pop(0)
         if graph[temp].id == end:
             tr.append(temp)
-            print(tr)
+            return tr
         else:
             closed.append(temp)
             for path in graph[temp].paths:
-                index = get_node(graph, path[0])
+                index = get_node_index(graph, path[0])
                 if index not in closed:
                     open.append(index)
                     route.append(tr + [temp])
