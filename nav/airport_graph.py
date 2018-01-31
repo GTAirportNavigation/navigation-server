@@ -6,12 +6,18 @@ class Dir(enum.Enum):
     X = 0
     # North
     N = 1
+    NE = 2
     # South
-    S = 2
-    # East
     E = 3
+    SE = 4
+    # East
+    S = 5
+    SW = 6
     # West
-    W = 4
+    W = 7
+    NW = 8
+   
+
 
 # Graph Node
 class Node(object):
