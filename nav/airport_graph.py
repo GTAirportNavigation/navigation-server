@@ -38,3 +38,29 @@ class Type(enum.Enum):
     STAIRS = 1
     ESCALATOR = 2
     TRAIN = 3
+
+def get_node(graph, id):
+    index = 0
+    for node in graph:
+        if node.id == id:
+            return index
+        index += 1
+
+# Wrapper to Obtain Instructions
+def find_path(graph, start, end, parameters=[]):    
+    open = [get_node(graph, start)]
+    closed = []
+    route = [[]]
+    while len(open) > 0:
+        temp = open.pop(0)
+        tr = route.pop(0)
+        if graph[temp].id == end:
+            tr.append(temp)
+            print(tr)
+        else:
+            closed.append(temp)
+            for path in graph[temp].paths:
+                index = get_node(graph, path[0])
+                if index not in closed:
+                    open.append(index)
+                    route.append(tr + [temp])
