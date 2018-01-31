@@ -38,22 +38,20 @@ class Type(enum.Enum):
     # with no intrinsic value
     # but connects other nodes
     Joint = 0
-    Gate = 1
+    Concourse = 1
+    Gate = 2
     # Airline Counter
-    Counter = 2
-    Restaurant = 3
-    Store = 4
+    Counter = 3
+    Restaurant = 4
+    Store = 5
 
 # Graph Node
 class Node(object):
-    def __init__(self, id='', name='', dir=Dir.X, type=Type.Joint):
+    def __init__(self, id='', name='', type=Type.Joint, floor=0):
         self.id = id
         self.name = name
-        # direction node is facing
-        # useful in situations such as:
-        # '500 feet on your LEFT'
-        self.dir = dir
         self.type = type
+        self.floor = floor
         self.paths = []
     def __str__(self):
         return 'ID: {} Name: \'{}\' Type: {}\nPaths: {}'.format(self.id, self.name, self.type, self.paths)
@@ -64,11 +62,9 @@ class Node(object):
 class Path(enum.Enum):
     NORMAL = 0
     STAIRS = 1
-    ESCALATOR_UP = 2
-    # Escalator Down
-    ESCALATOR_DW = 3
-    ELEVATOR = 4
-    TRAIN = 5
+    ESCALATOR = 2
+    ELEVATOR = 3
+    TRAIN = 4
 
 # Get Index in Graph from ID
 def get_node_index(graph, id):
@@ -79,21 +75,27 @@ def get_node_index(graph, id):
         index += 1
 
 # Wrapper to Obtain Instructions
-def find_path(graph, start, end, parameters=[]):    
+# graph - array of nodes to search in
+# start - id of the starting node
+# end - id of the ending node
+# constraints - TODO used to find paths
+# with specific constraints
+def find_path(graph, start, end, constraints=[]):    
     open = [get_node_index(graph, start)]
-    closed = []
+    visited = []
     route = [[]]
     while len(open) > 0:
         temp = open.pop(0)
         tr = route.pop(0)
+        print('Iteration:',temp,tr)
         if graph[temp].id == end:
             tr.append(temp)
             return tr
         else:
-            closed.append(temp)
+            visited.append(temp)
             for path in graph[temp].paths:
                 index = get_node_index(graph, path[0])
-                if index not in closed:
+                if index not in visited:
                     open.append(index)
                     route.append(tr + [temp])
 
