@@ -3,5 +3,6 @@ from . import views
 
 urlpatterns = [
     path('', views.default, name=''),
+    re_path('gate/.*/', views.route_gate, name=''),
     re_path('route/.*/', views.route, name='')
 ]
