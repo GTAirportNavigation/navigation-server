@@ -15,7 +15,7 @@ def route(request):
     flightno = str(request)[30:][:-3]
     if flightno == 'test':
         gate = 'TG2'
-        instructions = airport_graph.condense(airport_graph.translate(testing.domestic, airport_graph.find_path(testing.domestic, 'TNenter', gate)))
+        instructions = airport_graph.condense(airport_graph.translate(testing.domestic, airport_graph.find_path(testing.domestic, 'DTXN1', gate)))
         json = airport_graph.convert_to_json(instructions)
         return HttpResponse(json)
     else:

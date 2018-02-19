@@ -2,9 +2,13 @@ import enum
 
 ## Angle Shortcuts Definitions ##
 NORTH = 0
+NORTHEAST = 45
 EAST = 90
+SOUTHEAST = 135
 SOUTH = 180
+SOUTHWEST = 225
 WEST = 270
+NORTHWEST = 315
 
 def get_direction(degree):
     if degree == 0:
@@ -48,6 +52,8 @@ class Type(enum.Enum):
     Food = 4
     Retail = 5
     Club = 7
+    Security = 8
+    Exit = 9
 
 # Graph Node
 class Node(object):

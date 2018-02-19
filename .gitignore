@@ -102,3 +102,6 @@ ENV/
 
 # IDE files
 .idea/
+
+# Hidden Project Folder
+/hidden
