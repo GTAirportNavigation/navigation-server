@@ -21,3 +21,4 @@ def test(request):
     # for test in tests:
     #     print(test.name)
     return HttpResponse("")
+

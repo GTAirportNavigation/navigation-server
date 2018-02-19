@@ -36,6 +36,7 @@ class Node(object):
     def __init__(self, id='', name='', type=Type.Joint, floor=0):
         self.id = id
         self.name = name
+<<<<<<< HEAD
         self.type = type
         self.floor = floor
         self.paths = []
@@ -43,6 +44,29 @@ class Node(object):
         return 'ID: {} Name: \'{}\' Type: {}\nPaths: {}'.format(self.id, self.name, self.type, self.paths)
     def add_path(self, id, distance, angle, path_type):
         self.paths.append((id, distance, angle, path_type))
+=======
+        # direction node is facing
+        # useful in situations such as:
+        # '500 feet on your LEFT'
+        self.dir = dir
+        # adjacent nodes of the current node
+        self.neighbours = set()
+        # joint = True for nodes which have no
+        # significance themselves, just as
+        # connecting points to other nodes
+        self.joint = False
+        self.paths = []
+    def __str__(self):
+        return 'ID: {} Name: \'{}\' Joint: {}\nPaths: {}'.format(self.id, self.name, self.joint, self.paths)
+    def add_path(self, id, distance, dir, type):
+        self.paths.append((id, distance, dir, type))
+        # add adjacent node of the current location, the dir is relative to the current location
+    def add_neighbour(self, neighbour, dir, distance, type):
+        if neighbour not in self.neighbours:
+            self.dir = dir
+            self.neighbours.add(neighbour)
+
+>>>>>>> fd71339c96ff10fc32f120bc13756a2520def0a8
 
 # Path Type
 class Path(enum.Enum):
