@@ -75,6 +75,7 @@ class Path(enum.Enum):
     ESCALATOR = 2
     ELEVATOR = 3
     TRAIN = 4
+    SECURITY = 5
 
 # Get Index in Graph from ID
 def get_node_index(graph, id):

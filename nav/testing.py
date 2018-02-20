@@ -3,11 +3,11 @@ from .airport_graph import *
 domestic = []
 
 # T Concourse Missing Nodes: Elevators and Escalators !!
-domestic.append(Node('TNenter', 'T Concourse', Type.Joint))
-domestic.append(Node('TN', 'T Concourse', Type.Joint))
+domestic.append(Node('TXN', 'T Concourse', Type.Joint))
+domestic.append(Node('TN', '', Type.Joint))
 domestic.append(Node('TR24', 'News Express', Type.Retail))
 domestic.append(Node('TG9', 'Gate T9', Type.Gate))
-domestic.append(Node('TSenter', 'T Concourse', Type.Joint))
+domestic.append(Node('TSN', 'T Concourse', Type.Joint))
 domestic.append(Node('TJ1', '', Type.Joint))
 domestic.append(Node('TF12', 'Burger King', Type.Food))
 domestic.append(Node('TR16', 'Travel Size Essentials', Type.Retail))
@@ -36,7 +36,7 @@ domestic.append(Node('TG14', 'Gate T14', Type.Gate))
 domestic.append(Node('TG15', 'Gate T15', Type.Gate))
 domestic.append(Node('TM', 'T Concourse', Type.Joint))
 domestic.append(Node('TSenter', 'T Concourse', Type.Joint))
-domestic.append(Node('TS', 'T Concourse', Type.Joint))
+domestic.append(Node('TS', '', Type.Joint))
 domestic.append(Node('TR25X1', 'Shellis News', Type.Retail))
 domestic.append(Node('TR28', 'Tech Showcase', Type.Retail))
 domestic.append(Node('TJ11', '', Type.Joint))
@@ -245,5 +245,5 @@ insert_path(domestic, 'DTXS5', 'DTJ15', 100, NORTHEAST)
 insert_path(domestic, 'DTXS6', 'DTJ16', 100, NORTHEAST)
 
 # connect domestic terminal to t concourse
-insert_path(domestic, 'DTSN', 'TNenter', -1, EAST)
-insert_path(domestic, 'DTSS', 'TSenter', -1, EAST)
+insert_path(domestic, 'DTSN', 'TNenter', 0, EAST, Path.SECURITY)
+insert_path(domestic, 'DTSS', 'TSenter', 0, EAST, Path.SECURITY)
