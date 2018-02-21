@@ -17,7 +17,6 @@ def flight_track(request):
         directions = airport_graph.condense(airport_graph.translate(testing.domestic, airport_graph.find_path(testing.domestic, 'DTXN1', 'TG3')))
     c = {'directions': directions}
     template = loader.get_template('directions.html')
-    print('got template')
     return HttpResponse(template.render(c))
 
 def demo_js(request):

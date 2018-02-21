@@ -121,7 +121,7 @@ def translate(graph, directions):
                 instructions.append(temp)
     return instructions
 
-def condense(instructions):
+def cutout(instructions):
     counter = 0
     while(counter != (len(instructions) - 1)):
         if instructions[counter][2] == instructions[counter + 1][2] and instructions[counter][3] == instructions[counter + 1][3]:
@@ -131,6 +131,34 @@ def condense(instructions):
         else:
             counter += 1
     return list(instructions)
+
+def condense(instructions):
+    english = []
+    instructions = cutout(instructions)
+    for i in range(len(instructions)):
+        sentence = ''
+        if instructions[i][3] == 0:
+            if instructions[i][1] != 0:
+                sentence += 'Head ' + str(instructions[i][1]) + ' feet'
+                if instructions[i][0] != '':
+                    sentence += ' to ' + instructions[i][0]
+            else:
+                sentence += 'You have arrived at ' + instructions[i][0]
+        elif instructions[i][3] == 5:
+            sentence += 'Pass through ' + instructions[i - 1][0]
+        english.append(sentence)
+        if i != len(instructions) - 1:
+            if instructions[i][2] != instructions[i + 1][2]:
+                turn = 'Turn'
+                angle = instructions[i + 1][2] - instructions[i][2]
+                print(angle)
+                if (angle > 0 and angle < 180) or (angle < -180 and angle > -360):
+                    turn += ' right'
+                elif (angle < 0 and angle > -180) or (angle > 180 and angle < 360):
+                    turn += ' left'
+                english.append(turn)
+    print(english)
+    return english
 
 # angle is the angle from node1 to node2
 def insert_path(graph, node1, node2, distance, angle, path_type=Path.NORMAL):
