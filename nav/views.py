@@ -13,6 +13,6 @@ def route(request):
         start = 'DTJ10'
     else:
         start = args[3].upper()
-    instructions = airport_graph.condense(airport_graph.translate(testing.domestic, airport_graph.find_path(testing.domestic, start, end)))
+    instructions = airport_graph.cutout(airport_graph.translate(testing.domestic, airport_graph.find_path(testing.domestic, start, end)))
     json = airport_graph.convert_to_json(instructions)
     return HttpResponse(json)
