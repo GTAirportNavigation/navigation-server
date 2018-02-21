@@ -28,6 +28,7 @@ function searchFlightNo() {
 }
 
 function getNavigation() {
+    // jQuery.get('http://127.0.0.1:8000/nav')
     console.log(document.location.href)
     document.location.href = document.location.href + "flight/" + document.getElementById("rf").innerHTML
 }

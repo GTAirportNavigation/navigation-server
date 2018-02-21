@@ -47,7 +47,9 @@ class EnumField(models.Field):
     COUNTER = 3
     FOOD = 4
     RETAIL = 5
+    EXIT = 6
     CLUB = 7
+    SECURITY = 8
 
     TYPE_CHOICES = (
         (JOINT, 'Joint'),
@@ -55,13 +57,14 @@ class EnumField(models.Field):
         (COUNTER, 'Counter'),
         (FOOD, 'Food'),
         (RETAIL, 'Retail'),
+        (EXIT, 'Exit'),
         (CLUB, 'Club'),
+        (SECURITY, 'Security'),
     )
 
 
 
 class Node(models.Model):
-
     name = models.CharField(max_length=50, blank=True)
     id = models.CharField(max_length=50, primary_key=True)
     # node_id = models.CharField(max_length=50, blank=True)
