@@ -41,16 +41,28 @@ def get_index_from_id(id):
 def get_id_from_index(index):
 	return nodes[index].id
 
+def edge(aid, bid):
+	for path in paths:
+		if (path.to_node_id.lower() == aid.lower() and path.from_node_id.lower() == bid.lower()):
+			return (path.from_node_id.lower(), path.distance, path.angle, path.type)
+		elif (path.from_node_id.lower() == aid.lower() and path.to_node_id.lower() == bid.lower()):
+			return (path.to_node_id.lower(), path.distance, path.angle, path.type)
+
+
 def path(sid, eid):
-	p = find_path(sid, eid, -1)
-	p.pop(0)
+	node_list = find_path(sid, eid, -1)
 
-	np = []
-	for element in p:
-		pass
-		# np.append(get_id_from_index())
+	node_ids = []
+	for node in node_list:
+		node_ids.append(get_id_from_index(node))
 
+	route = []
+	for x in range(len(node_ids) - 1):
+		aid = node_ids[x]
+		bid = node_ids[x + 1]
+		route.append(edge(aid, bid))
 
+	return route
 
 def find_path(sid, eid, constraint=-1):
 	sindex = get_index_from_id(sid)

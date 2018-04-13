@@ -14,7 +14,7 @@ def route(request):
 	if len(args) == 3:
 		src = args[1]
 		dst = args[2]
-		response = str(graph.find_path(src, dst))
+		response = str(graph.path(src, dst))
 
 	return HttpResponse(response)
 
@@ -37,7 +37,7 @@ def shop(request):
 		if args[0] == 'r':
 			pass
 			# shop_list = utils.get_shops(filt, False)
-		elif args[0] == 's':
+		elif args[0] == 'e':
 			pass
 			# shop_list = utils.get_shops(filt, True)
 		response = str(shop_list)
