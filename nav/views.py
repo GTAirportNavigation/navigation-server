@@ -35,8 +35,10 @@ def shop(request):
 	if len(args) == 2:
 		filt = args[1]
 		if args[0] == 'r':
+			pass
 			# shop_list = utils.get_shops(filt, False)
 		elif args[0] == 's':
+			pass
 			# shop_list = utils.get_shops(filt, True)
 		response = str(shop_list)
 
