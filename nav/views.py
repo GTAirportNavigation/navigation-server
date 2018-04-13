@@ -27,3 +27,26 @@ def flight(request):
 		response = '[\'' + (gate[0] + 'G' + gate[1:]) + '\']'
 
 	return HttpResponse(response)
+
+def shop(request):
+	response = ''
+	shop_list = []
+	args = str(request)[20:-2].split('/')
+	if len(args) == 2:
+		filt = args[1]
+		if args[0] == 'r':
+			# shop_list = utils.get_shops(filt, False)
+		elif args[0] == 's':
+			# shop_list = utils.get_shops(filt, True)
+		response = str(shop_list)
+
+	return HttpResponse(response)
+
+def detail(request):
+	response = ''
+	args = str(request)[20:-2].split('/')
+	if len(args) == 2:
+		loc = args[1]
+		# response = utils.get_detail(loc)
+
+	return HttpResponse(response)

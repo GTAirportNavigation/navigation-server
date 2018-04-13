@@ -47,7 +47,10 @@ def path(sid, eid):
 
 	np = []
 	for element in p:
-		np.append()
+		pass
+		# np.append(get_id_from_index())
+
+
 
 def find_path(sid, eid, constraint=-1):
 	sindex = get_index_from_id(sid)
