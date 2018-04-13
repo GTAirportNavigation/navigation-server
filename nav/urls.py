@@ -2,6 +2,8 @@ from django.urls import path, re_path
 from . import views
 
 urlpatterns = [
-    path('', views.default, name=''),
-    re_path('route/.*/', views.route, name='')
+	path('', views.default),
+	path('refresh', views.refresh),
+	re_path('route/.*', views.route),
+	re_path('flight/.*', views.flight),
 ]

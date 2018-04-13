@@ -1,18 +1,29 @@
 from django.http import HttpResponse
-from . import airport_graph, testing
+from . import graph, utils, testing
 
 def default(request):
-    return HttpResponse('')
+	return HttpResponse('GT Airport Navigation')
+
+def refresh(request):
+	# return HttpResponse(str(graph.nodes))
+	return HttpResponse('Graph Refreshed')
 
 def route(request):
-    args = (str(request)[20:-2]).split('/')
-    print(args)
-    end = args[2].upper()
-    start = ''
-    if args[3] == '':
-        start = 'DTJ10'
-    else:
-        start = args[3].upper()
-    instructions = airport_graph.cutout(airport_graph.translate(testing.domestic, airport_graph.find_path(testing.domestic, start, end)))
-    json = airport_graph.convert_to_json(instructions)
-    return HttpResponse(json)
+	response = ''
+	args = str(request)[20:-2].split('/')
+	if len(args) == 3:
+		src = args[1]
+		dst = args[2]
+		response = str(graph.find_path(src, dst))
+
+	return HttpResponse(response)
+
+def flight(request):
+	response = ''
+	args = str(request)[20:-2].split('/')
+	if len(args) == 2:
+		f = args[1]
+		gate = utils.get_gate(f)
+		response = '[\'' + (gate[0] + 'G' + gate[1:]) + '\']'
+
+	return HttpResponse(response)
