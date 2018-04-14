@@ -66,7 +66,7 @@ def trim(route):
 	return route
 
 def path(sid, eid):
-	node_list = find_path(sid, eid, -1)
+	node_list = find_path(sid, eid)
 
 	node_ids = []
 	for node in node_list:
@@ -80,7 +80,7 @@ def path(sid, eid):
 
 	return trim(route)
 
-def find_path(sid, eid, constraint=-1):
+def find_path(sid, eid, constraint=0):
 	sindex = get_index_from_id(sid)
 	frontier = []
 	frontier.append(sindex)
