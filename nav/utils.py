@@ -78,6 +78,30 @@ def get_on_time(flightId):
 
 	return (((filed_departuretime + filedFlightLength) - estimatedarrivaltime) < 15*60)
 
+#returns the filed departure time as an integer in Unix Epoch time.
+#If presenting directly to users, it's necessary to convert this to normal human readable time.
+#https://stackoverflow.com/questions/3682748
+def get_filed_departure_time(flightId):
+	init_flight_aware()
+
+	session = Session()
+	session.auth = HTTPBasicAuth(username, password)
+
+
+	transport = Transport(cache=SqliteCache(), session=session)
+	client = Client('http://flightxml.flightaware.com/soap/FlightXML2/wsdl', transport = transport)
+
+	response0 = zeep.helpers.serialize_object(client.service.FlightInfo(flightId, 15), target_cls=collections.OrderedDict)
+
+	flight = 0
+
+	while((flight < 14) and ((response0['flights'][flight + 1]['filed_departuretime'] - int(time.time())) > 0)):
+	    flight += 1
+
+	filed_departuretime = response0['flights'][flight]['filed_departuretime']
+
+	return filed_departuretime
+
 #returns the estimated time of arrival as an integer in Unix Epoch time.
 #If presenting directly to users, it's necessary to convert this to normal human readable time.
 #https://stackoverflow.com/questions/3682748
