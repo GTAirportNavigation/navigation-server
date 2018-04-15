@@ -29,17 +29,17 @@ def flight(request):
 	return HttpResponse(response)
 
 def shop(request):
+	filt = ''
 	response = ''
 	shop_list = []
 	args = str(request)[20:-2].split('/')
-	if len(args) == 2:
-		filt = args[1]
-		if args[0] == 'r':
-			pass
-			# shop_list = utils.get_shops(filt, False)
-		elif args[0] == 'e':
-			pass
-			# shop_list = utils.get_shops(filt, True)
+	if len(args) < 3:
+		if len(args) == 2:
+			filt = args[1]
+		if args[0] == 'f':
+			shop_list = graph.get_food(filt)
+		elif args[0] == 'r':
+			shop_list = graph.get_retail(filt)
 		response = str(shop_list)
 
 	return HttpResponse(response)

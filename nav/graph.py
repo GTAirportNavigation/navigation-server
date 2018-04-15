@@ -25,17 +25,25 @@ def get_neighbors(id):
 	n = []
 	for path in paths:
 		if (path.to_node_id.lower() == id.lower()):
-			n.append(get_index_from_id(path.from_node_id))
+			n.append(path.from_node_id)
 		elif (path.from_node_id.lower() == id.lower()):
-			n.append(get_index_from_id(path.to_node_id))
-	print(n)
+			n.append(path.to_node_id)
+	# print(n)
 	return n
+
+def get_neighbors_indices(id):
+	neighbors = get_neighbors(id)
+
+	for x in range(len(neighbors)):
+		neighbors[x] = get_index_from_id(neighbors[x])
+
+	return neighbors
 
 def get_index_from_id(id):
 	for i in range(len(nodes)):
 		# print(nodes[i].id, ' ', id)
 		if nodes[i].id.lower() == id.lower():
-			print('INDEX: ' + str(i))
+			# print('INDEX: ' + str(i))
 			return i
 
 def get_id_from_index(index):
@@ -47,6 +55,34 @@ def edge(aid, bid):
 			return [path.from_node_id.lower(), path.distance, path.angle, path.type]
 		elif (path.from_node_id.lower() == aid.lower() and path.to_node_id.lower() == bid.lower()):
 			return [path.to_node_id.lower(), path.distance, path.angle, path.type]
+
+# in this function we allow filtering to limit
+# results by a given filter - in this case concourses
+# therefore, just pass in to filter the desired concourse
+# could be 'A' or 'T' for example, more complex filters could
+# of course be added of these systems later
+def get_type(type, filter):
+	shops = []
+
+	print('filter: ' + filter)
+	hasfilter = not (filter == '')
+	for node in nodes:
+		if (node.type == type):
+			if hasfilter:
+				neighbors = get_neighbors(node.id)
+				for n in neighbors:
+					if (n[0].lower() == filter.lower()):
+						shops.append([node.id, node.name])
+						break
+			else:
+				shops.append([node.id, node.name])
+	return shops
+
+def get_food(filter):
+	return get_type(models.EnumField.FOOD, filter)
+
+def get_retail(filter):
+	return get_type(models.EnumField.RETAIL, filter)
 
 def trim(route):
 	x = 0
@@ -95,7 +131,6 @@ def find_path(sid, eid, constraint=0):
 		if cid.lower() == eid.lower():
 			return (croute + [cindex])
 		else:
-			print(get_neighbors(cid))
 			for nindex in get_neighbors(cid):
 				if nindex not in visited:
 					frontier.append(nindex)
