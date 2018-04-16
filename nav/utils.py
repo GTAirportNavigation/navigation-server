@@ -48,7 +48,7 @@ def get_gate(flightId):
 
 	originGate = response1['gate_orig']
 
-	return originGate
+	return (originGate, get_on_time(flightId))
 
 #returns a boolean representing if the flight is on-time or not
 def get_on_time(flightId):
