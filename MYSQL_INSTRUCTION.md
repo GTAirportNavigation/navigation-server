@@ -18,10 +18,3 @@ Database Name: `GTAirportNavigation`
 Username: `root`
 
 Password: `password`
-
-* Start Django server.
-```bash
-python manage.py runserver
-```
-
-It may have warning but it should proceed without errors. 

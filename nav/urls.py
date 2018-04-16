@@ -6,7 +6,9 @@ urlpatterns = [
 	path('refresh', views.refresh),
 	re_path('route/.*', views.route),
 	re_path('flight/.*', views.flight),
+	re_path('f', views.shop),
+	re_path('f/.*', views.shop),
+	re_path('r', views.shop),
 	re_path('r/.*', views.shop),
-	re_path('e/.*', views.shop),
 	re_path('detail/.*', views.detail),
 ]

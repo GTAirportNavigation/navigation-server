@@ -48,7 +48,7 @@ def get_gate(flightId):
 
 	originGate = response1['gate_orig']
 
-	return originGate
+	return (originGate, get_on_time(flightId))
 
 #returns a boolean representing if the flight is on-time or not
 def get_on_time(flightId):
@@ -142,9 +142,9 @@ def get_filed_departure_time(flightId):
 
 	return filed_departuretime
 
-#returns the estimated time of arrival as an integer in Unix Epoch time.
-#If presenting directly to users, it's necessary to convert this to normal human readable time.
-#https://stackoverflow.com/questions/3682748
+# returns the estimated time of arrival as an integer in Unix Epoch time.
+# If presenting directly to users, it's necessary to convert this to normal human readable time.
+# https://stackoverflow.com/questions/3682748
 def get_estimated_arrival_time(flightId):
 	init_flight_aware()
 
