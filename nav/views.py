@@ -24,7 +24,7 @@ def flight(request):
 	if len(args) == 2:
 		f = args[1]
 		gate = utils.get_gate_info(f)
-		response = '[\"' + (gate[0][0] + 'G' + gate[0][1:]) + '\", ' + int(gate[1] == True) + ']'
+		response = '[\"' + (gate[0][0] + 'G' + gate[0][1:]) + '\", ' + str(int(gate[1])) + ']'
 
 	return HttpResponse(response)
 
