@@ -14,7 +14,7 @@ def route(request):
 	if len(args) == 3:
 		src = args[1]
 		dst = args[2]
-		response = str(graph.path(src, dst))
+		response = str(graph.path(src, dst)).replace("\'", "\"")
 
 	return HttpResponse(response)
 
@@ -23,8 +23,8 @@ def flight(request):
 	args = str(request)[20:-2].split('/')
 	if len(args) == 2:
 		f = args[1]
-		gate = utils.get_gate(f)
-		response = '[\"' + (gate[0] + 'G' + gate[0][1:]) + '\", ' + gate[1] + ']'
+		gate = utils.get_gate_info(f)
+		response = '[\"' + (gate[0][0] + 'G' + gate[0][1:]) + '\", ' + str(int(gate[1])) + ']'
 
 	return HttpResponse(response)
 

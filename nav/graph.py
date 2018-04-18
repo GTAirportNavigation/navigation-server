@@ -131,7 +131,8 @@ def find_path(sid, eid, constraint=0):
 		if cid.lower() == eid.lower():
 			return (croute + [cindex])
 		else:
-			for nindex in get_neighbors(cid):
+			for nid in get_neighbors(cid):
+				nindex = get_index_from_id(nid)
 				if nindex not in visited:
 					frontier.append(nindex)
 					route.append(croute + [cindex])
