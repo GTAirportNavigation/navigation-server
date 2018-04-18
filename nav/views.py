@@ -14,7 +14,7 @@ def route(request):
 	if len(args) == 3:
 		src = args[1]
 		dst = args[2]
-		response = str(graph.path(src, dst))
+		response = str(graph.path(src, dst)).replace("\'", "\"")
 
 	return HttpResponse(response)
 
