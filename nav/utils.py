@@ -185,3 +185,26 @@ def get_wait_times():
 			waitTimes.append(2)
 
 	return waitTimes
+
+#returns lot availability in the form of a boolean list
+#[IntHour, IntPR, NDay, NEcon, NHour, PR-A, PR-C, SDay, SEcon, SHour, WEcon]
+def get_lot_availability():
+	page = requests.get("http://apps.atl.com/Passenger/Parking/Default.aspx")
+
+	lotAvailability = []
+
+	soup = BeautifulSoup(page.text, "html.parser")
+
+	lotAvailabilityTextList = soup.find(id="bodySection_wucParkingLotStatus_UplParking").find_all("div", {"class":"col-xs-3"})
+
+	del lotAvailabilityTextList[:1]
+
+	for lotText in lotAvailabilityTextList:
+
+		if ("Open" in str(lotText)):
+			lotAvailability.append(True)
+			
+		else:
+			lotAvailability.append(False)
+
+	return lotAvailability
