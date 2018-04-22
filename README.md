@@ -5,7 +5,7 @@ Navigation server provides RESTful services for navigation view front end.
 
 The services provided include <b>flight search</b> service, <b>navigation</b> service, <b>restuarants look up</b> service and <b>nearby exploration</b> service. 
 
-## Installation
+## Install Guide
 * Dependency
 
 <b>Python >= 3.6</b>
@@ -36,6 +36,10 @@ python manage.py migrate
 ```
 
 * Start Django server.
+
+## Release Notes
+
+todo
 
 ```
 python manage.py runserver
