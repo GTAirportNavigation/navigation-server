@@ -67,7 +67,7 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-* Start Django server.
+## Run Instruction
 
 ```
 python manage.py runserver
