@@ -15,6 +15,15 @@ The services provided include <b>flight search</b> service, <b>navigation</b> se
 * The flight external API is relatively unstable, so the server will be temporarily down sometime. 
 * Because our current setup, we have cross-origin issue. 
 
+## Download Project
+* Download by using git.
+
+```
+git clone https://github.com/GTAirportNavigation/navigation-server.git
+```
+
+* Download zip file from GitHub webiste. [zip address](https://github.com/GTAirportNavigation/navigation-server)
+
 ## Install Guide
 ### Pre-requisites
 
@@ -37,15 +46,6 @@ pip install -r requirements.txt
 pip install -r requirements.txt --upgrade
 ```
 
-## Download Project
-* Download by using git.
-
-```
-git clone https://github.com/GTAirportNavigation/navigation-server.git
-```
-
-* Download zip file from GitHub webiste. [zip address](https://github.com/GTAirportNavigation/navigation-server)
-
 ## Run Instructions
 * Start local Mysql server
 
@@ -67,7 +67,7 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-## Run Instruction
+* Start the backend server.
 
 ```
 python manage.py runserver
